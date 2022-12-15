@@ -1,0 +1,286 @@
+@import url('https://fonts.googleapis.com/css2?family=Overpass:wght@400;700&&display=swap');
+
+:root {
+  --color-orange: hsl(25, 97%, 53%);
+  --color-white: hsl(0, 0%, 100%);
+  --color-light-gray: hsl(217, 12%, 63%);
+  --color-medium-gray: hsl(216, 12%, 22%);
+  --color-dark-blue: hsl(213, 19%, 18%);
+  --color-very-dark-blue: hsl(216, 12%, 8%);
+
+  --ff-main: 'Overpass', sans-serif;
+
+  --btn-size: 2.5rem;
+}
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+picture,
+img {
+  max-width: 100%;
+  display: block;
+}
+
+/* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.visually-hidden {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  bottom: 7.35rem;
+  left: 4.8rem;
+  white-space: nowrap;
+  width: 1px;
+}
+
+body {
+  font-size: 15px;
+  font-family: var(--ff-main);
+  display: grid;
+  align-items: center;
+  justify-items: center;
+  grid-template-columns: 1fr;
+  min-height: 100vh;
+  background-color: var(--color-very-dark-blue);
+}
+
+main {
+  position: relative;
+  padding: 1.45em;
+}
+
+/* ----- Rate card ----- */
+.card {
+  display: grid;
+  gap: 0.5em;
+  background-image: linear-gradient(to bottom, hsl(213, 19%, 16%), hsl(216, 25%, 13%));
+  box-shadow: 0 0.5em 1em hsl(0, 0%, 7%);
+  padding: 1.5em;
+  border-radius: 1em;
+  max-width: 26rem;
+}
+
+.closing {
+  animation: closing 0.5s cubic-bezier(.54,.09,.49,.67) forwards;
+}
+
+@keyframes closing {
+  20% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(0);
+  }
+}
+
+.closed {
+  display: none;
+}
+
+.card__star {
+  padding: 0.9em;
+  border-radius: 50%;
+  background-color: var(--color-medium-gray);
+  margin-bottom: 0.75em;
+}
+
+.card__title {
+  font-size: 1.6rem;
+  color: var(--color-white);
+}
+
+.card__description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  color: var(--color-light-gray);
+}
+
+.card__rating {
+  display: grid;
+  justify-content: space-between;
+  grid-template-areas: '. . . . .'
+                       'rate rate rate rate rate';
+  margin-top: 1.35em;
+}
+
+.card__rating input[type="radio"]:hover + label,
+.card__rating input[type="radio"]:focus-visible + label {
+  color: var(--color-white);
+  background-color: var(--color-orange);
+  transition: background-color 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.card__rating input[type="radio"]:is(:checked) + label {
+  color: var(--color-white);
+  background-color: var(--color-light-gray);
+  transition: background-color 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+.card__rating label {
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  width: var(--btn-size);
+  height: var(--btn-size);
+  border-radius: 50%;
+  color: var(--color-light-gray);
+  background-color: var(--color-medium-gray);
+}
+
+.card__rating__submit__btn {
+  font-size: 0.9rem;
+  cursor: pointer;
+  grid-area: rate;
+  padding: 0.8rem 0.9rem;
+  border: none;
+  border-radius: 50vw;
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  color: var(--color-white);
+  background-color: var(--color-orange);
+  letter-spacing: 2px;
+}
+
+.card__rating__submit__btn:hover,
+.card__rating__submit__btn:focus-visible {
+  color: var(--color-orange);
+  background-color: var(--color-white);
+  transition: background-color 0.5s cubic-bezier(0.65, 0.05, 0.36, 1);
+}
+
+/* ----- Thanks card ----- */
+#thanks-card {
+  display: none;
+  justify-items: center;
+}
+
+#thanks-card.show {
+  display: grid;
+  animation: show 0.5s cubic-bezier(0.21, 0.38, 0.66, 0.16) forwards;
+}
+
+@keyframes show {
+  0% {
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.card__phone {
+  margin-top: 0.5em;
+}
+
+.card__rate {
+  font-size: 0.9rem;
+  color: var(--color-orange);
+  background-color: var(--color-medium-gray);
+  padding: 0.35em 0.8em;
+  border-radius: 2em;
+  margin-block: 1em;
+}
+
+.card__thanks {
+  font-size: 1.5rem;
+  color: var(--color-white);
+}
+
+.card__text {
+  color: var(--color-light-gray);
+  line-height: 1.6;
+  max-width: 21rem;
+  margin-bottom: 0.5em;
+}
+
+footer {
+  position: absolute;
+  bottom: 1rem;
+  color: var(--color-white);
+}
+
+.attribution {
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: hsl(228, 45%, 64%);
+}
+
+.attribution a:visited {
+  color: hsl(270, 100%, 70%);
+}
+
+@media (min-width: 43.75em) {
+  /* ----- Rate card ----- */
+  .card {
+    padding: 2.25em 2.4em;
+    border-radius: 1.85em;
+  }
+
+  .card__star {
+    margin-bottom: 1.5em;
+    width: 48px;
+    height: 48px;
+    padding: 1em;
+  }
+
+  .card__title {
+    font-size: 1.75rem;
+  }
+
+  .card__description {
+    font-size: initial;
+    line-height: 1.7;
+  }
+
+  .card__rating label {
+    --btn-size: 3.25rem;
+  }
+
+  .card__rating__submit__btn {
+    padding: 0.9rem 1rem;
+    margin-bottom: initial;
+  }
+
+  /* ----- Thanks card ----- */
+  .card__rate {
+    font-size: initial;
+    padding: 0.45em 1.2em;
+    margin-block: 2em;
+  }
+
+  .card__thanks {
+    font-size: 1.75rem;
+  }
+
+  .card__text {
+    text-align: center;
+  }
+}
